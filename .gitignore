@@ -2,6 +2,7 @@
 Java-Coding/out/
 *.class
 *.iml
+.idea/
 
 # ignore not needed c++ files
 *.exe
