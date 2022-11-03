@@ -108,12 +108,12 @@ int main() {
     int data, position;
  
     while(1) {
-        printf("\n\n------ Circular Singly Linked List -------\n");
+        printf("------ Circular Singly Linked List -------\n");
         printf("\n1. Insert a node at beginning");
         printf("\n2. Insert a node at end");
-        printf("\n5. Delete a node from end");
-        printf("\n7. Print list from beginning");
-        printf("\n11. Exit\n");
+        printf("\n3. Delete a node from end");
+        printf("\n4. Print list from beginning");
+        printf("\n5. Exit\n");
  
         printf("Enter your choice: ");
         scanf("%d", &user_choice);
@@ -131,17 +131,17 @@ int main() {
                 insert_at_end(data);
                 break;
  
-            case 5: 
+            case 3: 
                 printf("Deleting a node from end\n");
                 delete_at_end();
                 break;
             
-            case 7: 
+            case 4: 
                 printf("Printing the list from beginning\n");
                 print_list();
                 break;
  
-            case 11:
+            case 5:
                 printf("Program was terminated\n\n");
                 return 0;
  
@@ -151,3 +151,4 @@ int main() {
     }
     return 0;
 }
+

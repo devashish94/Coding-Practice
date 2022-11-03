@@ -1,5 +1,12 @@
 package LinkedList.SingleLinkedList;
 
+class Node {
+    public int data;
+    String value;
+    Node next;
+}
+
+
 public class SingleLinked {
     private Node head;
     private Node tail;
@@ -229,7 +236,7 @@ public class SingleLinked {
             removeLast();
             return;
         }
-        if (index < 0 && index >= length) {
+        if (index < 0 || index >= length) {
             System.out.println("List index out of bounds");
             return;
         }
@@ -241,5 +248,17 @@ public class SingleLinked {
         Node current_node = getNode(index);
         current_node = null;
         length--;
+    }
+    public static void main(String[] args) {
+        SingleLinked list = new SingleLinked();
+        for (int i = 0; i < 5; i++) {
+            list.add(i, i + 1);
+        }
+        list.show();
+        list.removeLast();
+        list.removeFirst();
+        System.out.println(list.length);
+        list.remove(5);
+        list.show();
     }
 }
