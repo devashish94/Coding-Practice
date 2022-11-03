@@ -6,7 +6,6 @@ class Node {
     Node next;
 }
 
-
 public class SingleLinked {
     private Node head;
     private Node tail;
