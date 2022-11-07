@@ -2,24 +2,35 @@
 #include <vector>
 #include <utility>
 #include <stack>
+#define pb push_back
+#define pp pop_back()
 using namespace std;
-
-string removeDuplicates(string s) {
-	stack<char> a;
-	for (int i = 0; i < s.size();) {
-		if (s[i] != s[i + 1]) {
-			if (s[i] == a.top()) {
-				a.pop();
-				i++;
+ 
+void process(string x, string& t) {
+	for(char i : x) {
+		if (i == '#') {
+			if (!t.empty()) {
+				t.pop_back();
 			} else {
-				a.push(s[i]);
+				continue;
 			}
+			
 		} else {
-			i += 2;
+			t += i;
 		}
 	}
 }
+
+bool backspaceCompare(string s, string t) {
+	string a = "", b = "";
+	process(s, a);
+	process(t, b);
+	if (a == b) {
+		return true;
+	}
+	return false;
+}
+
 int main() {
-    string s = "abbaca";
-	cout << removeDuplicates(s) << "\n";
+	cout << backspaceCompare("a#c", "b") << "\n";
 }
