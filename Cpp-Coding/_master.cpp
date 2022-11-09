@@ -1,29 +1,24 @@
-#include <iostream>
-#include <stack>
-#define does_this_work ios_base::sync_with_stdio(false);cin.tie(NULL)
-#pragma GCC optimize("O3,unroll-loops")
-#pragma GCC target("avx2,tune=native")
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int convert(string);
-void solve() {
-	string s = "-124";
-	cout << convert(s) << "\n";
-}
-
-int convert(string s) {
-	int n = 0;
-	for (int i = 1; i < s.size(); i++) {
-		n = 10 * n + (s[i] - '0');
-	}
-	return n;
-}
-
 int main() {
-    does_this_work;
     int t; cin >> t;
 	while (t--) {
-		solve();
+		int n; cin >> n;
+		vector<int> arr(n);
+		for (int i = 0; i < n; i++) {
+			cin >> arr[i];
+		}
+		unordered_map<int, int> m;
+		for (int i = 0; i < n; i++) {
+			m[arr[i]]++;
+		}
+		for (auto i : m) {
+			if (i.second >= 3) {
+				cout << i.first << "\n";
+				return 0;
+			}
+		}
+		cout << -1 << "\n";
 	}
 }
