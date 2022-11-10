@@ -1,8 +1,8 @@
 import java.util.Stack;
 
 class Solve implements Runnable {
-    private String s;
-    private Stack<Integer> a;
+    final private String s;
+    final private Stack<Integer> a;
 
     @Override
     public void run() {
@@ -30,6 +30,7 @@ class SolutionBack {
         Stack<Integer> a = new Stack<>(), b = new Stack<>();
         Solve oneObj = new Solve(s, a), twoObj = new Solve(t, b);
         Thread one = new Thread(oneObj), two = new Thread(twoObj);
+
         one.start();
         two.start();
 
@@ -39,7 +40,7 @@ class SolutionBack {
     }
 }
 
-public class BackspaceStringLeetcode {
+public class MultithreadingBackspaceStringLeetcode {
     public static void main(String[] args) {
         SolutionBack sol = new SolutionBack();
         String s = "xywrrmp";
