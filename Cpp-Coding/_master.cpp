@@ -2,23 +2,24 @@
 using namespace std;
 
 int main() {
-    int t; cin >> t;
-	while (t--) {
-		int n; cin >> n;
-		vector<int> arr(n);
-		for (int i = 0; i < n; i++) {
-			cin >> arr[i];
-		}
-		unordered_map<int, int> m;
-		for (int i = 0; i < n; i++) {
-			m[arr[i]]++;
-		}
-		for (auto i : m) {
-			if (i.second >= 3) {
-				cout << i.first << "\n";
-				return 0;
-			}
-		}
-		cout << -1 << "\n";
+	int n; cin >> n;
+	string s; cin >> s;
+	
+	map<string, int> m;
+	
+	for (int i = 0; i < n - 1; i++) {
+		string t = "";
+		t += s[i]; t += s[i + 1];
+		m[t]++;
 	}
+	
+	int max_value = -1;
+	string key = "";
+	for (auto i : m ) {
+		if (i.second > max_value) {
+			key = i.first;
+			max_value = i.second;
+		}
+	}
+	cout << key << "\n";
 }
