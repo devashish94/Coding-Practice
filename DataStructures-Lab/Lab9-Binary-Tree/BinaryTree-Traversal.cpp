@@ -33,9 +33,9 @@ void postorder(Node* node) {
     if (node == NULL) {
         return;
     }
-    postorder(node->left);
-    postorder(node->right);
-    cout << node->data << " ";
+    postorder(node -> left);
+    postorder(node -> right);
+    cout << node -> data << " ";
 }
 
 
