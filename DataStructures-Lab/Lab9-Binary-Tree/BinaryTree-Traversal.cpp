@@ -9,7 +9,7 @@ typedef struct Node {
     Node (int val) {
         data = val; 
     }
-} Node ;
+} Node;
 
 void preorder(Node* node) {
     if (node == NULL) {
