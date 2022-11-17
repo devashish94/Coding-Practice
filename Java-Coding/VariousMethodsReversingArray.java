@@ -39,7 +39,7 @@ public class VariousMethodsReversingArray {
         // creating another array
         int[] rev = new int[length];
 
-        /* This method of Reversing the Array involves creating another array.
+        /*  This method of Reversing the Array involves creating another array.
          *  The below for-loop iterates over the given array from the end and,
          *  the newly created array is used to store those elements from start.
          *  This can be easily understood by the following example.
