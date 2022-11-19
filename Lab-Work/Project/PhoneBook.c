@@ -60,7 +60,7 @@ int main() {
         root = insert(root, arr, number);
     }
 
-    printf("****************************\n\tPhoneBook\n");
+    printf("****************************\n\tPhone-Book\n");
     print(root);
     printf("****************************\n");
 }   
