@@ -2,24 +2,26 @@
 using namespace std;
 
 int main() {
-	int n; cin >> n;
-	string s; cin >> s;
-	
-	map<string, int> m;
-	
-	for (int i = 0; i < n - 1; i++) {
-		string t = "";
-		t += s[i]; t += s[i + 1];
-		m[t]++;
-	}
-	
-	int max_value = -1;
-	string key = "";
-	for (auto i : m ) {
-		if (i.second > max_value) {
-			key = i.first;
-			max_value = i.second;
+	int t; cin >> t; 
+	while (t--) {
+		vector<int> arr(3);
+		cin >> arr[0] >> arr[1] >> arr[2];
+		sort(arr.begin(), arr.end());
+		
+		if (arr[2] == arr[1] && arr[0] % 2 == 1) {
+			cout << "NO\n";
+		} else if (arr[2] == arr[1] && arr[0] % 2 == 0) {
+			cout << "YES\n";
+		}
+		else if (arr[0] == arr[1] && arr[2] % 2 == 1) {
+			cout << "NO\n";
+		} else if (arr[0] == arr[1] && arr[2] % 2 == 0) {
+			cout << "YES\n";
+		}
+		else if (arr[2] - arr[1] != arr[0] && arr[2] - arr[0] != arr[1]) {
+			cout << "NO\n";
+		} else {
+			cout << "YES\n";
 		}
 	}
-	cout << key << "\n";
 }

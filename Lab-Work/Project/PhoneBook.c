@@ -14,13 +14,13 @@ static void printIndividual(struct Node* node) {
     printf("Number:\t%lld\n\n", node->number);
 }
 
-static void print(struct Node* node) {
+static void inorder(struct Node* node) {
     if (node == NULL) {
         return;
     }
-    print(node->left);
+    inorder(node->left);
     printIndividual(node);
-    print(node->right);
+    inorder(node->right);
 }
 
 static struct Node* newNode(char val[], long long int num) {
@@ -46,6 +46,18 @@ static struct Node* insert(struct Node* node, char val[], long long int num) {
     return node;
 }
 
+static void print(struct Node* node) {
+    printf("****************************\n\tPhone-Book\n");
+    inorder(node);
+    printf("****************************\n");
+}
+
+static void decoration() {
+    printf("Press the respective key for your operation\n");
+    printf("1. Show the Phone Book.\n");
+    printf("2. Insert into the Phone Book.\n");
+    printf("3. Exit\n");
+}
 
 int main() {
     struct Node* root = NULL;
@@ -53,15 +65,36 @@ int main() {
     char arr[30];
     long long int number = 0;
 
-    int t; scanf("%d", &t);
-    while (t--) {
-        printf("enter name and number: ");
-        scanf("%s %lld", arr, &number);
-        root = insert(root, arr, number);
+    while (1) {
+        printf("\n");
+        decoration();
+        printf("Enter your choice: ");
+        int choice;
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1: {
+                print(root);
+                break;
+
+            }
+            case 2: {
+                char c;
+                printf("\nEnter Name [first letter capital]: ");
+                scanf("%c", &c);
+                scanf("%[^\n]s", arr);
+                printf("Enter Phone Number: ");
+                scanf("%lld", &number);
+                root = insert(root, arr, number);
+                printf("\n");
+                break;
+
+            }
+            case 3:
+                printf("Bye!!\n");
+                return 0;
+            default: {
+                printf("Invalid Number\n");
+            }
+        }
     }
-
-    printf("****************************\n\tPhone-Book\n");
-    print(root);
-    printf("****************************\n");
 }   
-
