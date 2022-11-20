@@ -27,8 +27,7 @@ static struct Node* newNode(char val[], long long int num) {
     struct Node* node = (struct Node*) malloc (sizeof(struct Node));
     strcpy(node->name, val);
     node->number = num;
-    node->left = NULL;
-    node->right = NULL;
+    node->left = node->right = NULL;
     return node;
 }
 
