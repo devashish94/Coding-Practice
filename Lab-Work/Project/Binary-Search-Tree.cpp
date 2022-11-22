@@ -30,7 +30,7 @@ static struct Node* insert(Node* node, int val) {
         node->right = insert(node->right, val); 
     } else {
         node->left = insert(node->left, val);
-    }
+    } 
     return node;
 }
 

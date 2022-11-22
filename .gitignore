@@ -1,5 +1,6 @@
 # ignore not needed java files
 Java-Coding/out/
+*/out/*
 *.class
 *.iml
 .idea/
