@@ -1,5 +1,4 @@
-#include <iostream>
-#include <vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 struct Node {
@@ -12,6 +11,13 @@ struct Node {
     }
 };
 
+// prototypes
+static void inorder(Node* node);
+static void bfs(Node* node);
+static struct Node* insert(Node* node, int val);
+static Node* search(Node* node, int val);
+static int inorderSuccessor(Node* node, int val);
+
 static void inorder(Node* node) {
     if (node == NULL) {
         return;
@@ -19,6 +25,23 @@ static void inorder(Node* node) {
     inorder(node->left);
     cout << node->data << " ";
     inorder(node->right);
+}
+
+static void bfs(Node* node) {
+    if (node == NULL) return;
+    queue<Node*> q;
+    q.push(node);
+    while(!q.empty()) {
+        int count = q.size();
+        while (count --> 0) {
+            Node* t = q.front();
+            cout << t->data << "\t";
+            q.pop();
+            if (t->left != NULL) q.push(t->left);
+            if (t->right != NULL) q.push(t->right);
+        }
+        cout << "\n";
+    }
 }
 
 static struct Node* insert(Node* node, int val) {
@@ -34,12 +57,37 @@ static struct Node* insert(Node* node, int val) {
     return node;
 }
 
+static Node* searchNode(Node* node, int val) {
+    if (node->data == val) {
+        return node;
+    }
+    if (val > node->data) {
+        return searchNode(node->right, val);
+    }
+    return searchNode(node->left, val);
+}
+
+static int inorderSuccessor(Node* node, int val) {
+    int successor = node->data;
+    while (node != NULL) {
+        if (val >= node->data) {
+            node = node->right;
+        } else if (val < node->data) {
+            successor = node->data;
+            node = node->left;
+        }
+    }
+    return successor;
+}
+
 int main() {
     Node* root = NULL;
-    vector<int> arr = {50, 15, 62, 5, 20, 58, 91, 3, 8, 37, 60, 24};
+    vector<int> arr = {3, 8, 1, 6, 4, 7, 13, 14, 10};
     for (int i : arr) {
         root = insert(root, i);
     }
-    inorder(root);
-    cout << "\n";
+    inorder(root); cout << "\n";
+    int x = inorderSuccessor(root, 10);
+    cout << x << " \n";
+
 }

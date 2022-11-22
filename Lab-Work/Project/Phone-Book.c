@@ -45,6 +45,30 @@ static struct Node* insert(struct Node* node, char val[], long long int num) {
     return node;
 }
 
+static Node* searchNode(struct Node* node, int val) {
+    if (node->data == val) {
+        return node;
+    }
+    if (val > node->data) {
+        return searchNode(node->right, val);
+    }
+    return searchNode(node->left, val);
+}
+
+
+static int inorderSuccessor(struct Node* node, int val) {
+    int successor = node->data;
+    while (node != NULL) {
+        if (val >= node->data) {
+            node = node->right;
+        } else if (val < node->data) {
+            successor = node->data;
+            node = node->left;
+        }
+    }
+    return successor;
+}
+
 static void print(struct Node* node) {
     printf("****************************\n\tPhone-Book\n");
     inorder(node);
