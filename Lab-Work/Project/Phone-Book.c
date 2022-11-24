@@ -1,3 +1,4 @@
+/* Phone Book Application Using Binary Search Tree */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,6 +9,8 @@ struct Node {
     char name[NAME_SIZE];
     struct Node *left, *right;
 };
+
+typedef struct Node Node;
 
 static void printIndividual(struct Node* node) {
     printf("Name:\t%s\n", node->name);
@@ -45,29 +48,45 @@ static struct Node* insert(struct Node* node, char val[], long long int num) {
     return node;
 }
 
-static Node* searchNode(struct Node* node, int val) {
-    if (node->data == val) {
-        return node;
+static Node* minValue(Node* node) {
+    while (node && node->left != NULL) {
+        node = node->left;
     }
-    if (val > node->data) {
-        return searchNode(node->right, val);
-    }
-    return searchNode(node->left, val);
+    return node;
 }
 
-
-static int inorderSuccessor(struct Node* node, int val) {
-    int successor = node->data;
-    while (node != NULL) {
-        if (val >= node->data) {
-            node = node->right;
-        } else if (val < node->data) {
-            successor = node->data;
-            node = node->left;
+static Node* deleter(Node* node, char val[]) {
+    int result = strcmp(val, node->name);
+    if (node == NULL) {
+        return NULL;
+    } else if (result > 0) {
+        node->right = deleter(node->right, val);
+    } else if (result < 0) {
+        node->left = deleter(node->left, val);
+    } else {
+        if (node->left == NULL && node->right != NULL) {
+            Node* temp = node->right;
+            free(node);
+            node = NULL;
+            return temp;
+        } else if (node->left != NULL && node->right == NULL) {
+            Node* temp = node->left;
+            free(node);
+            node = NULL;
+            return temp;
+        } else if (node->left == NULL && node->right == NULL) {
+            return NULL;
+        } else {
+            char minV[30];
+            strcpy(minValue(node->right)->name, minV);
+            strcpy(minV, node->name);
+            node->right = deleter(node->right, minV);
+            return node;
         }
     }
-    return successor;
+    return node;
 }
+
 
 static void print(struct Node* node) {
     printf("****************************\n\tPhone-Book\n");
@@ -79,7 +98,8 @@ static void decoration() {
     printf("Press the respective key for your operation\n");
     printf("1. Show the Phone Book.\n");
     printf("2. Insert into the Phone Book.\n");
-    printf("3. Exit\n");
+    printf("3. Delete a Contact.\n");
+    printf("4. Exit\n");
 }
 
 int main() {
@@ -112,7 +132,15 @@ int main() {
                 break;
 
             }
-            case 3:
+            case 3: {
+                char c;
+                printf("Enter the Name of the contact you want to delete:");
+                scanf("%c", &c);
+                scanf("%[^\n]s", arr);
+                root = deleter(root, arr);
+                break;
+            }
+            case 4:
                 printf("Bye!!\n");
                 return 0;
             default: {

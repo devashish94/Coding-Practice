@@ -1,5 +1,4 @@
 /*  C program to Implement the Circular Singly Linked List */
- 
 #include <stdio.h>
 #include <stdlib.h>
  
