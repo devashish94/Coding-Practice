@@ -50,10 +50,15 @@ int isEmpty(Node* head) {
 }
 
 void enqueue(Node** stack_one, Node** stack_two, int data) {
+    // Moving elements of stack_one to stack_two
     while (!isEmpty(*stack_one)) {
         *stack_two = push(*stack_two, pop(stack_one));
     }
+    
+    // push the new element to stack_one
     *stack_one = push(*stack_one, data);
+
+    // Move the elements stack_two back to stack_one
     while (!isEmpty(*stack_two)) {
         *stack_one = push(*stack_one, pop(stack_two));
     }

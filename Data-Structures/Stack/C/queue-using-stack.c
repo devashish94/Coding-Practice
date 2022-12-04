@@ -50,10 +50,15 @@ int isEmpty(Node* head) {
 }
 
 void enqueue(Node** stack_one, Node** stack_two, int data) {
+    // Moving elements of stack_one to stack_two
     while (!isEmpty(*stack_one)) {
         *stack_two = push(*stack_two, pop(stack_one));
     }
+    
+    // push the new element to stack_one
     *stack_one = push(*stack_one, data);
+
+    // Move the elements stack_two back to stack_one
     while (!isEmpty(*stack_two)) {
         *stack_one = push(*stack_one, pop(stack_two));
     }
@@ -69,8 +74,8 @@ void dequeue(Node** stack_one) {
 
 int main() {
     //  Main logic for creating a queue using a stack: 
-    //  1. For dequeue operation, simply use the pop function of stack
-    //  2. For enqueue operation:
+    //  1. For DeQueue operation, simply use the pop function of stack
+    //  2. For EnQueue operation:
     //      a. Move all the elements of the stack_one to stack_two using the pop function
     //      b. push the new element inside the stack_one
     //      c. Move all the elements of stack_two back to the stack_one
