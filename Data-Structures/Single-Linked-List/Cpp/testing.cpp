@@ -1,16 +1,10 @@
 #include<iostream>
+#include <algorithm>
 
-void show() {
-    static int a = 0;
-    if (a == 10) {
-        return;
-    }
-    a++;
-    std::cout << a << " ";
-    show();
+bool comp(int a, int b) {
+    return a < b;
 }
 
 int main() {
-    show();
-    std::cout << "\n";
+    std::cout << "Min: " << std::max({6969, 6, 9, 69, 690}, comp) << "\n";
 }

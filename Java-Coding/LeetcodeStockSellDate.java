@@ -1,6 +1,6 @@
 //Got TLE in this one
 //public class Solution {
-//    public static void main(String[] args) {
+//    public static void KotlinLearning.main(String[] args) {
 //        int[] prices = {7,1,5,3,6,4};
 //        int max = 0;
 //        for (int i = 0; i < prices.length - 1; i++) {
