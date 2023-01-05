@@ -1,9 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <utility>
-#include <stack>
-#define pb push_back
-#define pp pop_back()
+#include <bits/stdc++.h>
 using namespace std;
  
 void process(string x, string& t) {
