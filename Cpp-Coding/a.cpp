@@ -2,5 +2,5 @@
 using namespace std;
 
 int main() {
-    cout << "code is running\n";
+    cout << "running this on linux\n";
 }
