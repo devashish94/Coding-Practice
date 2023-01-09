@@ -1,6 +1,10 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 int main() {
-    cout << "running this on linux\n";
+    for (int i = 0; i < 10; i++) {
+        cout << "writing this from linux: ";
+        int* p = &i;
+        cout << p << "\n";
+    }
 }
