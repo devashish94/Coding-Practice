@@ -7,6 +7,7 @@ long long power(int N,int R) {
         ans  = ans * (N % 1000000007);
     }
     return ans % 1000000007;
+    // This was not that easy of a question
 }
 
 int main() {
