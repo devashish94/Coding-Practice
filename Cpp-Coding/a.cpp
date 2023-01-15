@@ -1,16 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long power(int N,int R) {
-    long long ans = 1;
-    for (int i = 1; i <= R; i++) {
-        ans  = ans * (N % 1000000007);
+int negative(vector<int>& arr) {
+    int left = 0, right = arr.size() - 1, neg = -1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] < 0) {
+            neg = mid;
+            left = mid + 1;
+        } else {
+            right = mid - 1;    
+        }
+    }    
+    if (neg == -1) return -1;
+    return neg + 1;
+}
+
+int positive(vector<int>& arr) {
+    int left = 0, right = arr.size() - 1, t = -1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] <= 0) {
+            left = mid + 1;
+        } else {
+            t = mid;
+            right = mid - 1;
+        }
     }
-    return ans % 1000000007;
-    // This was not that easy of a question
+    if (t == -1) return -1;
+    return arr.size() - t;
+}
+
+int maximumCount(vector<int>& arr) {
+    int pos = positive(arr), neg = negative(arr);  
+    if (pos == neg && pos == -1) {
+        return 0;
+    }
+    return max(pos, neg);
 }
 
 int main() {
-    long long n, r; cin >> n >> r;
-    cout << power(n, r) << "\n";
+    vector<int> arr = {5,20,66,1314};
+    cout << "Answer: " << maximumCount(arr) << "\n";
 }
