@@ -2,5 +2,6 @@
 using namespace std;
 
 int main() {
-    cout << sizeof(size_t); 
+    multiset<pair<int, int>> m;
+    m.insert({1, 2});
 }
