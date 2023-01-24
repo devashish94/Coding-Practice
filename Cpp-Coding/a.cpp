@@ -2,11 +2,13 @@
 using namespace std;
 
 int main() {
-    int n, coins = 0; cin >> n; 
-    int d[] = {100, 20, 10, 5, 1};
-    for (int i : d) {
-        coins += n / i;
-        n %= i;
+    int t, n, m; cin >> t;
+    while (t--) {
+        cin >> n >> m;
+        if ((n == 2 && m == 3) || (n == 3 && m == 3) || (n == 3 && m == 2)) {
+            cout << "2 2\n";
+        } else {
+            cout << "1 1\n";
+        }
     }
-    cout << coins << "\n";
 }
