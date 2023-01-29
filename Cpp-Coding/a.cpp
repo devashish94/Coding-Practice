@@ -13,7 +13,7 @@ void solve() {
         for (int j = i + 1; j < n; j++) {
             int value = arr[i] + arr[j];
             if (m[value] != -1) {
-
+		cout << "hello world\n";
             }
         }
     }
