@@ -11,7 +11,7 @@ void solve() {
     for (auto& str : s) {
         cout << str << " ";
     }
-}
+} //something changed
 
 int main() { 
     int t; cin >> t;
