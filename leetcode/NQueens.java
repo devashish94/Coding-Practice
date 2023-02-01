@@ -5,7 +5,8 @@
  */
 
 /* Refactoring done. Now it should be a little easier to scale the program. */
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NQueens {
     char fill = 'x';    
@@ -68,9 +69,7 @@ public class NQueens {
         System.out.println("Matrix: " + arr.length + " x " + arr[row].length + ", initial: " + "(" + row + ", " + col + ")");
     }
 
-    private static void getCount(int count) {
-        System.out.println("count: " + count);
-    }
+    private static void getCount(int count) { System.out.println("count: " + count); }
     
     private static void banner() { System.out.println("-------------------------------"); }
 
