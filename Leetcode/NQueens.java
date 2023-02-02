@@ -1,33 +1,36 @@
 /*
- Problem with the logic right now:
-    - It prints non-max arrays
-    - It prints duplicate max arrays
+ Problems to fix and Ideas to implement:
+    - [SOLVED] It prints non-max arrays 
+    - It prints duplicate max arrays. FIX: 
+        - find all the duplicate co-ordinates
+        - analyse pattern 
  */
 
 /* Refactoring done. Now it should be a little easier to scale the program. */
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class NQueens {
     char fill = 'x';    
 
     public static void main(String[] args) {
-        int n = 4;
+        Scanner read = new Scanner(System.in);
+        int n = read.nextInt();
         createQueenMatrix(n);
     }
     
     private static void createQueenMatrix(int n) {
         ArrayList<char[][]> maxQueenArrays = new ArrayList<>();
-        int maxCount = 0;
+        int maxCount = 0, count = 1;
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
+                count = 1;
                 char[][] arr = new char[n][n];
                 fillDash(arr);
-                int count = 0;
                 setStartingPosition(row, col, arr);
-                count++; // deliberately kept this here, otherwise would not understand why count 1.
                 count = setFurtherPositions(arr, count);
-                if (count >= maxCount) {
+                if (count == maxQueensPossible(n)) {
                     initialInformation(row, col, arr);
                     maxCount = count;
                     maxQueenArrays.add(arr);
@@ -40,6 +43,21 @@ public class NQueens {
             banner();
         }
     } 
+
+    private static int maxQueensPossible(int n) {
+        int maxCount = 0, count = 1;
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                count = 1;
+                char[][] arr = new char[n][n];
+                fillDash(arr);
+                setStartingPosition(row, col, arr);
+                count = setFurtherPositions(arr, count);
+                if (count >= maxCount) maxCount = count;
+            }
+        }
+        return maxCount;
+    }
 
     private static void setStartingPosition(int row, int col, char[][] arr) {
         NQueens change = new NQueens();
