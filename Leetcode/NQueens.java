@@ -1,112 +1,24 @@
-/*
- Problems to fix and Ideas to implement:
-    - [SOLVED] It prints non-max arrays 
-    - It prints duplicate max arrays. FIX: 
-        - find all the duplicate co-ordinates
-        - analyse pattern 
- */
-
-/* Refactoring done. Now it should be a little easier to scale the program. */
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+/* I will surely solve this Problem */
+import java.util.*;
 
 public class NQueens {
-    char fill = 'x';    
+    Character fill = '.';    
 
     public static void main(String[] args) {
-        Scanner read = new Scanner(System.in);
-        int n = read.nextInt();
-        createQueenMatrix(n);
+        Queens(5);
     }
     
-    private static void createQueenMatrix(int n) {
-        ArrayList<char[][]> maxQueenArrays = new ArrayList<>();
-        int maxCount = 0, count = 1;
-        for (int row = 0; row < n; row++) {
-            for (int col = 0; col < n; col++) {
-                count = 1;
-                char[][] arr = new char[n][n];
-                fillDash(arr);
-                setStartingPosition(row, col, arr);
-                count = setFurtherPositions(arr, count);
-                if (count == maxQueensPossible(n)) {
-                    initialInformation(row, col, arr);
-                    maxCount = count;
-                    maxQueenArrays.add(arr);
-                }
-            }
-        }
-        System.out.println(n + " x " + n + " -> " + "Max Queens: " + maxCount);
-        for (char[][] arrays : maxQueenArrays) {
-            printGrid(arrays);
-            banner();
-        }
-    } 
-
-    private static int maxQueensPossible(int n) {
-        int maxCount = 0, count = 1;
-        for (int row = 0; row < n; row++) {
-            for (int col = 0; col < n; col++) {
-                count = 1;
-                char[][] arr = new char[n][n];
-                fillDash(arr);
-                setStartingPosition(row, col, arr);
-                count = setFurtherPositions(arr, count);
-                if (count >= maxCount) maxCount = count;
-            }
-        }
-        return maxCount;
+    private static void Queens(int n) {
+        NQueens solution = new NQueens();
+        Queue<int[]> possibleCells = new LinkedList<int[]>(); 
+        Character[][] arr = new Character[n][n];
+        possibleCells.add(new int[] {0, 0});
+        solution.crossDiagonals(0, 0, arr);
     }
 
-    private static void setStartingPosition(int row, int col, char[][] arr) {
-        NQueens change = new NQueens();
-        arr[row][col] = 'Q';
-        change.crossHorizontal(row, col, arr);
-        change.crossVertical(row, col, arr);
-        change.crossDiagonals(row, col, arr);
-    }
-    
-    private static int setFurtherPositions(char[][] arr, int count) {
-        NQueens change = new NQueens();
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                if (arr[i][j] == '-') {
-                    arr[i][j] = 'Q';
-                    count++;
-                    change.crossHorizontal(i, j, arr);
-                    change.crossVertical(i, j, arr);
-                    change.crossDiagonals(i, j, arr);
-                }
-            }
-        }
-        return count;
-    }
+    private static void banner() { System.out.println("################################################"); }
 
-    private static void initialInformation(int row, int col, char[][] arr) {
-        System.out.println("Matrix: " + arr.length + " x " + arr[row].length + ", initial: " + "(" + row + ", " + col + ")");
-    }
-
-    private static void getCount(int count) { System.out.println("count: " + count); }
-    
-    private static void banner() { System.out.println("-------------------------------"); }
-
-    private static void printGrid(char[][] arr) {
-        for (char[] i : arr) {
-            for (char j : i) {
-                System.out.print(j + " ");
-            }
-            System.out.print("\n");
-        }
-    }
-
-    private static void fillDash(char[][] arr) {
-        for (char[] i : arr) {
-            Arrays.fill(i, '-');
-        }
-    }
-
-    private void crossDiagonals(int row, int col, char[][] arr) {
+    private void crossDiagonals(int row, int col, Character[][] arr) {
         int saveRow = row - 1, saveCol = col - 1, saver = row - 1, savec = col + 1, r = row + 1, c = col - 1;
         // SE
         row++; col++;
@@ -131,7 +43,7 @@ public class NQueens {
         }
     }
 
-    private void crossVertical(int row, int col, char[][] arr) {
+    private void crossVertical(int row, int col, Character[][] arr) {
         int saveRow = row - 1;
         row++;
         while(row < arr.length) {
@@ -144,7 +56,7 @@ public class NQueens {
         }
     }
 
-    private void crossHorizontal(int row, int col, char[][] arr) {
+    private void crossHorizontal(int row, int col, Character[][] arr) {
         int saveCol = col - 1;
         col++;
         while (col < arr[row].length) {
