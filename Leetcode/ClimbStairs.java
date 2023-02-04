@@ -1,10 +1,10 @@
 public class ClimbStairs {
-    static int[] arr = new int[46];
+    static long[] arr = new long[1000];
 
     public static void main(String[] args) {
-        System.out.println(climbStairs(44));
+        System.out.println(climbStairs(999));
     }
-    public static int climbStairs(int n) {
+    public static long climbStairs(int n) {
         if (arr[n] != 0) {
             return arr[n];
         }
