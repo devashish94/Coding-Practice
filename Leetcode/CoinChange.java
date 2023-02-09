@@ -2,49 +2,24 @@ import java.util.*;
 
 public class CoinChange {
     public static void main(String[] args) {
-//        Integer[] coins = {1, 2, 3};
-        Integer[] coins = {2, 5, 3, 6};
-//        int amount = 4;
+        int[] coins = {2, 5, 3, 6};
         int amount = 10;
-        CoinChange solution = new CoinChange();
-        System.out.print(solution.coinChange(coins, amount));
-    }
-    public int coinChange(Integer[] coins, int amount) {
-        int currentAmount = 0, i = 0;
-        Set<String> allCombinations = new HashSet<>();
-        String empty = "";
-        helper(i, coins, empty, currentAmount, amount, allCombinations);
-        System.out.println(allCombinations);
-        return 0;
+        System.out.println("Answer: " + count(coins, coins.length, amount));
     }
 
-    private void helper (
-            int i,
-            Integer[] coins,
-            String empty,
-            int currentAmount,
-            int amount,
-            Set<String> allCombinations
-    ) {
-        if (currentAmount > amount) {
-            System.out.print("[FAIL] ");
-            return;
-        }
-        if (currentAmount == amount) {
-            System.out.print("[ADDED-ENTRY] ");
-            allCombinations.add(empty);
-            return;
-        }
-        if (i >= coins.length) {
-            System.out.print("[ARRAY-OUT] ");
-            return;
-        }
-        System.out.print("[UPDATING] ");
-        empty += coins[i];
-        currentAmount += coins[i];
-        System.out.println("before: empty = " + empty + ", currentAmount = " + currentAmount);
-        helper(i + 1, coins, empty, currentAmount, amount, allCombinations);
-        System.out.println("after: empty = " + empty + ", currentAmount = " + currentAmount);
-        helper(i, coins, empty, currentAmount, amount, allCombinations);
+    public static long count(int[] coins, int N, int sum) {
+        return f(0, 0, coins, sum);
     }
+
+    private static int f(int i, int sum, int[] coins, int amount) {
+        if (i >= coins.length || sum > amount) {
+            return 0;
+        }
+        if (sum == amount) {
+            return 1;
+        }
+        int deep = f(i, sum + coins[i], coins, amount);
+        int next = f(i + 1, sum, coins, amount);
+        return deep + next;
+     }
 }
