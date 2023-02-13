@@ -5,15 +5,17 @@ import java.util.*;
 public class CombinationSum {
     public static void main(String[] args) {
         CombinationSum solution = new CombinationSum();
-        int[] candidates = {10,1,2,7,6,1,5};
-        int target = 8;
+        int[] candidates = {1, 2, 3};
+        int target = 4;
         System.out.println(solution.combinationSum(candidates, target));
     }
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> allCombinations = new LinkedList<>();
         helperFunction(candidates, target, 0, 0, new LinkedList<>(), allCombinations);
         return allCombinations;
     }
+
     private static void helperFunction(
             int[] candidates,
             int target,
@@ -23,10 +25,9 @@ public class CombinationSum {
             List<List<Integer>> allCombinations) {
 
         if (index == candidates.length) {
-            return;
-        }
-        if (currentSum == target) {
-            allCombinations.add(new ArrayList<>(currentCombination));
+            if (currentSum == target) {
+                allCombinations.add(new LinkedList<>(currentCombination));
+            }
             return;
         }
         if (currentSum < target) {
