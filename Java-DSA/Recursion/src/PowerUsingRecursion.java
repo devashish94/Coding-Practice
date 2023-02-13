@@ -1,5 +1,3 @@
-package Recursion;
-
 public class PowerUsingRecursion {
     public static void main(String[] args) {
         System.out.println(RecursivePower(2, 0));
