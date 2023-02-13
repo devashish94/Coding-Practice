@@ -1,6 +1,7 @@
-// https://leetcode.com/problems/combination-sum/
+/* https://leetcode.com/problems/combination-sum/ */
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CombinationSum {
     public static void main(String[] args) {
@@ -25,15 +26,16 @@ public class CombinationSum {
             List<List<Integer>> allCombinations) {
 
         if (index == candidates.length) {
-            if (currentSum == target) {
-                allCombinations.add(new LinkedList<>(currentCombination));
-            }
+            return;
+        }
+        if (currentSum == target) {
+            allCombinations.add(new LinkedList<>(currentCombination));
             return;
         }
         if (currentSum < target) {
             currentSum += candidates[index];
             currentCombination.add(candidates[index]);
-            helperFunction(
+            helperFunction( /* Include */
                     candidates,
                     target,
                     index,
@@ -44,7 +46,7 @@ public class CombinationSum {
             currentSum -= candidates[index];
             currentCombination.remove(currentCombination.size() - 1);
         }
-        helperFunction(
+        helperFunction( /* Not Include */
                 candidates,
                 target,
                 index + 1,
