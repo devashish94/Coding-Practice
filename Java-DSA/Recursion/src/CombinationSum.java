@@ -26,34 +26,16 @@ public class CombinationSum {
             List<Integer> currentCombination,
             List<List<Integer>> allCombinations) {
 
-        if (index == candidates.length) {
+        if (index == candidates.length || currentSum > target) {
             return;
         }
         if (currentSum == target) {
             allCombinations.add(new LinkedList<>(currentCombination));
             return;
         }
-        if (currentSum < target) {
-            currentSum += candidates[index];
-            currentCombination.add(candidates[index]);
-            helperFunction( /* Include */
-                    candidates,
-                    target,
-                    index,
-                    currentSum,
-                    currentCombination,
-                    allCombinations
-            );
-            currentSum -= candidates[index];
-            currentCombination.remove(currentCombination.size() - 1);
-        }
-        helperFunction( /* Not Include */
-                candidates,
-                target,
-                index + 1,
-                currentSum,
-                currentCombination,
-                allCombinations
-        );
+        currentCombination.add(candidates[index]);
+        helperFunction(candidates, target, index, currentSum + candidates[index], currentCombination, allCombinations);
+        currentCombination.remove(currentCombination.size() - 1);
+        helperFunction(candidates, target, index + 1, currentSum, currentCombination, allCombinations);
     }
 }

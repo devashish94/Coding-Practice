@@ -2,34 +2,39 @@ import java.util.*;
 
 public class GfgCombinationSum {
     public static void main(String[] args) {
-        Integer[] arr = {7,2,6,5};
-        List<Integer> coins = Arrays.asList(arr);
-        int target = 16;
-        List<List<Integer>> answer = combinationSum(coins, target);
-        for (List<Integer> i : answer) {
-            System.out.println(i);
-        }
+        Integer[] arr = {8, 1, 8, 6, 8};
+        int target = 12;
+        ArrayList<Integer> coins = new ArrayList<>(List.of(arr));
+        ArrayList<ArrayList<Integer>> answer = combinationSum(coins, target);
+        for (var i : answer) System.out.println(i);
     }
-    static List<List<Integer>> combinationSum(List<Integer> coins, int target) {
-        List<List<Integer>> all = new ArrayList<>();
-        helper(0, coins, new ArrayList<>(), target, all);
-        for (var i : all) {
-            Collections.sort(i);
-        }
+    static ArrayList<ArrayList<Integer>> combinationSum(ArrayList<Integer> coins, int target) {
+        ArrayList<ArrayList<Integer>> all = new ArrayList<>();
+        Collections.sort(coins);
+        TreeSet<Integer> set = new TreeSet<>(coins);
+        coins.clear();
+        coins.addAll(set);
+        helper(0, 0, coins, new ArrayList<>(), target, all);
         return all;
     }
 
-    private static void helper(int i, List<Integer> coins, ArrayList<Integer> fill, int target, List<List<Integer>> all) {
-        if (i == coins.size() || target < 0) {
+    private static void helper(
+            int i,
+            int sum,
+            ArrayList<Integer> coins,
+            ArrayList<Integer> fill,
+            int target,
+            ArrayList<ArrayList<Integer>> all) {
+        if (i == coins.size() || sum > target) {
             return;
         }
-        if (target == 0) {
+        if (sum == target) {
             all.add(new ArrayList<>(fill));
             return;
         }
         fill.add(coins.get(i));
-        helper(i, coins, fill, target - coins.get(i), all);
+        helper(i, sum + coins.get(i), coins, fill, target, all);
         fill.remove(fill.size() - 1);
-        helper(i + 1, coins, fill, target, all);
+        helper(i + 1, sum, coins, fill, target, all);
     }
 }
