@@ -13,7 +13,8 @@ public class CombinationSum {
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> allCombinations = new LinkedList<>();
-        helperFunction(candidates, target, 0, 0, new LinkedList<>(), allCombinations);
+        List<Integer> child = new LinkedList<>();
+        helperFunction(candidates, target, 0, 0, child, allCombinations);
         return allCombinations;
     }
 
