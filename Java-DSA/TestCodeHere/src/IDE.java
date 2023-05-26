@@ -2,37 +2,24 @@ import java.util.*;
 
 class IDE {
     public static void main(String[] args) {
-        List<Long> arr = new ArrayList<>();
-        List<Long>  mini = new ArrayList<>();
-        long n = 1000L;
-        for (long i = 0L; i < n; i++) {
-            for (long j = 0L; j < n; j++) {
-                for (long k = 0L; k < n; k++) {
-                    Long first = first(new Long[] {i, j, k});
-                    Long second = second(i, j, k);
-                    arr.add(first);
-                    mini.add(second);
+        Scanner read = new Scanner(System.in);
+        int t = read.nextInt();
+        while (t-- > 0) {
+            int n = read.nextInt();
+            String s = read.next();
+            char ch = s.charAt(0);
+            int count = 2;
+            int tempCount = 2;
+            for (int i = 1; i < s.length(); i++) {
+                if (ch == s.charAt(i)) {
+                    tempCount++;
+                } else {
+                    tempCount = 2;
+                    ch = s.charAt(i);
                 }
+                count = Math.max(tempCount, count);
             }
+            System.out.println(count);
         }
-        for (int i = 0; i < arr.size(); i++) {
-            if (!Objects.equals(arr.get(i), mini.get(i))) {
-                System.out.println(arr.get(i) + " " + mini.get(i));
-            }
-        }
-    }
-
-    static long first(Long[] arr) {
-        Long min = arr[0];
-        for (Long j : arr) {
-            if (min < j) {
-                min = j;
-            }
-        }
-        return min;
-    }
-
-    static long second(long one, long two, long three) {
-        return Math.min(one, Math.min(two, three));
     }
 }
