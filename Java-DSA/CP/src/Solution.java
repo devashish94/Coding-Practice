@@ -1,33 +1,51 @@
 import java.util.*;
 
 public final class Solution {
+    static List<Long> save = new ArrayList<>();
+
     public static void main(String[] args) {
-        int[][] grid = {
-                {2, 4, 3, 5},
-                {5, 4, 9, 3},
-                {3, 4, 2, 11},
-                {10, 9, 13, 15}
-        };
-        System.out.println(new Solution().maxMoves(grid));
+        int[] arr = {-4,-5,-4};
+        System.out.println(new Solution().maxStrength(arr));
+        System.out.println(save);
     }
-    public int maxMoves(int[][] grid) {
-        int row = 0;
-        int col = 0;
-        return f(row, col, grid);
+
+    public long maxStrength(int[] arr) {
+        f(0, arr, new ArrayList<>());
+        long max = max(save);
+        System.out.println("Max: " + max);
+        return max;
     }
-    private int f(int row, int col, int[][] grid) {
-        int right = col + 1 < grid[row].length && grid[row][col + 1] > grid[row][col] ? 1 + f(row, col + 1, grid) : 0;
-        int rightUp = row - 1 > 0 && col + 1 < grid[row].length && grid[row - 1][col + 1] > grid[row][col] ? 1 + f(row - 1, col + 1, grid) : 0;
-        int rightDown = row + 1 < grid.length && col + 1 < grid[row].length && grid[row + 1][col + 1] > grid[row][col] ? 1 + f(row + 1, col + 1, grid) : 0;
-        return max(new int[] {right, rightUp, rightDown});
-    }
-    private static int max(int[] arr) {
-        int max = arr[0];
-        for (int i : arr) {
+
+    private static Long max(List<Long> output) {
+        Long max = output.get(0);
+        for (Long i : output) {
             if (i > max) {
                 max = i;
             }
         }
         return max;
+    }
+
+    private void f(int i, int[] input, List<Integer> output) {
+        if (i == input.length) {
+            if (output.size() == 0) {
+                return;
+            }
+            save.add(prod(output));
+            System.out.println(output);
+            return;
+        }
+        f(i + 1, input, output);
+        output.add(input[i]);
+        f(i + 1, input, output);
+        output.remove(output.size() - 1);
+    }
+
+    private long prod(List<Integer> output) {
+        int prod = 1;
+        for (int i : output) {
+            prod *= i;
+        }
+        return prod;
     }
 }
