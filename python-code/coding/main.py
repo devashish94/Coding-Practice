@@ -1,21 +1,18 @@
 class Solution:
-    def minExtraChar(self, s: str, dictionary: list[str]) -> int:
-        dictionary.sort(key=len, reverse=True)  # sort the dictionary, largest words first
-        count = 0
-        original_length = len(s)
+    def maxStrength(self, nums):
+        save = []
+        self.generate(0, nums, 1, save)
+        return max(save)
 
-        for word in dictionary:
-            if word in s:
-                count += len(word)
-                s = s[:s.find(word)] + s[s.find(word) + len(word):]  # remove the found word from the inputString
-                print(f'found: {word}, inputString left: "{s}"')
+    def generate(self, i, input_array, product, save):
+        if i == len(input_array):
+            print(product)
+            save.append(product)
+            return
+        self.generate(i + 1, input_array, product, save)
+        print(f'i: {i}, value: {input_array[i]}')
+        self.generate(i + 1, input_array, product * input_array[i], save)
 
-        return original_length - count
 
-
-# executing the above Solution class
-s = "leetscode"
-dictionary = ["leet", "code", "leetcode"]
-
-solution = Solution()
-print(f'Extra chars: {solution.minExtraChar(s, dictionary)}')
+arr = [0,-1]
+print(f'answer: {Solution().maxStrength(arr)}')
